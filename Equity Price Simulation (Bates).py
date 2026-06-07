@@ -114,18 +114,3 @@ print(f"Prob of loss (>0% down):      {(quarter_pred < data.iloc[-1]).mean()*100
 sns.boxplot(y=quarter_pred[(quarter_pred>np.percentile(quarter_pred, 5))&(quarter_pred<np.percentile(quarter_pred, 95))])
 plt.title("Price after 1 Quarter")
 plt.show()
-
-# Return
-'''
-Current price: $14.9100
-Total force sell trial out of 20000 attempts: 25
-Mean price after 1 quarter:   $560.2396
-Median price after 1 quarter: $245.0831
-5% quantile (downside):       $36.7315
-95% quantile (upside):        $1855.8697
-Prob of loss (>0% down):      1.1%
-'''
-# Message
-'''
-Its not working
-'''
