@@ -1,0 +1,39 @@
+AI Suggestion 
+
+**Workflow**
+
+1. **Data Loading & Preparation**  
+   Load financial time series (prices or returns) with pandas. Convert to returns if needed. Handle missing values.
+
+2. **Rolling Windows**  
+   Split the series into overlapping rolling windows (e.g. 252 trading days). Use a reasonable step size (e.g. 20 or 63 days). Work window by window.
+
+3. **Fast Candidate Detection**  
+   Compute a spectrogram on the current window. Find the strongest peaks in the time-frequency plane. These peaks give good initial guesses for frequency, location, and rough length. Select the top 8–15 candidates.
+
+4. **Parametric Atom Fitting (PyTorch)**  
+   For each candidate, create a small differentiable model with these learnable parameters:  
+   - Amplitude  
+   - Exact location (start time)  
+   - Length  
+   - Fade-in intensity  
+   - Fade-out intensity  
+   - Frequency (small adjustment)  
+
+   Use `torch.optim.Adam` to minimise reconstruction error for 200–500 steps.
+
+5. **Greedy Selection & Residual Update**  
+   Keep the atoms that reduce error the most. Subtract their contribution from the residual. Repeat detection + fitting until adding more atoms gives little improvement (usually keep 5–12 atoms per window).
+
+6. **Feature Extraction**  
+   From the final atoms in each window, extract interpretable features such as:  
+   - Number of active atoms  
+   - Dominant frequency / cycle length  
+   - Total energy  
+   - Average fade intensity  
+   - Residual error  
+
+   Store everything in a pandas DataFrame with timestamps.
+
+7. **Output**  
+   Save the feature DataFrame. Optionally plot original vs reconstructed series and track how features evolve over time.
