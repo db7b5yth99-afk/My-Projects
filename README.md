@@ -3,12 +3,12 @@
 
 # Visitor Guide
 - Highlighted Project
-    - Time Series Analysis Toolkit/Dynamic FFT Implementation.py
+    - Time Series Analysis Toolkit/A Dynamic FFT Implementation on TSA.py
         - This reflect my learning progress a lot and is by far the most complicated project. On top of that, I see a lot of potential in it. 
 
 - Completed Project (From Latest to Oldest):
     - Time series analysis toolkit
-        - Dynamic FFT Implementation
+        - A Dynamic FFT Implementation on TSA
             - Build a model that dynamically apply FFT in different window at a list of specified period to better decompose the time series cycles.
             - Include Gaussian fade-in and out option to simulate reallife financal time series pereformance. 
         - Economic cycle indicator
